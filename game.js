@@ -624,7 +624,7 @@ function renderMap(){
    QRコードを読み取った先で、その場所固有の謎が出題される。   */
 
 function goToPuzzle(spot){
-  // どの経路から来ても、冒険開始前は謎に進ませない（最終防衛線）
+  // どの経路から来ても、冒険開始前は謎に進ませない
   if(!isAdventureStarted()){
     alert(NOT_STARTED_MSG);
     renderTop();
@@ -640,10 +640,18 @@ function goToPuzzle(spot){
   state.activeSpotId = spot.id;
   saveState();
 
-  // QRコードを読み取ったら、ジャイロセンサーのミニゲームを挟まず
-  // そのまま問題を表示する。
-  showPuzzle(spot);
+  playCinematic(
+    "✨",
+    "印を見つけた！",
+    "Something Found",
+    "すると、近くで何かを発見した……",
+    () => {
+      showPuzzle(spot);
+    }
+  );
 }
+
+/* ---------------- 謎 ---------------- */
 
 function showPuzzle(spot){
   state.phase = "puzzle";
