@@ -1,1 +1,0 @@
-# zao_onsensai_webquiz
